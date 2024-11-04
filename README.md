@@ -13,13 +13,13 @@ The project is actively in development, and the final version will encompass all
 1. **Display the Country with the Most Movies/Shows**  
    The application identifies and displays the country with the highest number of productions available on Netflix, allowing users to observe dominant regions in the platform’s catalog.
 
-2. **Sort by Date Added to Netflix**  
+2. **Sort by Date Added to Netflix - coming soon🛠️**  
    Users can sort the movie and show list by the date added to Netflix, making it easy to view the newest and oldest items in the catalog.
 
 3. **Calculate the Difference Between Release Date and Netflix Availability**  
    By entering a specific movie/show ID, users can see how many days passed between the production's release date and its availability on Netflix.
 
-4. **Average Duration of Movies/Shows by Country**  
+4. **Average Duration of Movies/Shows by Country - coming soon🛠️**  
    The application calculates the average duration of productions per country, providing insights into production trends in different regions.
 
 ## Technologies
