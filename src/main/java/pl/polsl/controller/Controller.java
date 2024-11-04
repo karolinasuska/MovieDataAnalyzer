@@ -10,27 +10,29 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 /**
- *
- * Manages the interactions between the {@link Model} and {@link View} classes.
- * This controller initializes the application, handles user input, and updates 
- * the view based on model data.
+ * Controller class that manages the interactions between the {@link Model} and {@link View} classes.
+ * This controller initializes the application, processes user input, and updates the view based on model data.
  * 
- * <p>Responsibilities include:
+ * <p>Responsibilities include:</p>
  * <ul>
  *   <li>Setting up the initial view state based on command-line arguments, if provided.</li>
  *   <li>Handling events triggered by the view's buttons to display the country with the most movies 
  *       and calculate the date difference for specific movies.</li>
+ *   <li>Configuring keyboard shortcuts for actions.</li>
  * </ul>
  * 
  * @author Karolina Suska
- * @version 1.2
- * 
+ * @version 2.1
  */
 public class Controller  {
     
-    /** The model instance containing application data and business logic. */
+    /** 
+     * The model instance containing application data and business logic. 
+     */
     private Model model;
-    /** The view instance responsible for displaying the GUI. */
+    /** 
+     * The view instance responsible for displaying the GUI. 
+     */
     private View view;
     
     /**
@@ -63,15 +65,12 @@ public class Controller  {
      *   <li>Configures the {@code calculateDateDiffButton} to calculate the release date difference
      *       based on the entered movie ID.</li>
      * </ul>
-     * <p>If the movie ID entered is invalid or empty, displays an error message in a dialog box.
+     * <p>If the movie ID entered is invalid or empty, displays an error message in a dialog box.</p>
      */
     private void viewEvent(){
-       view.showCountryButton.setAction(new AbstractAction("Show Country") {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                String countryWithMostMovies = model.getCountryWithMostMovies();
-                view.updateCountryLabel(countryWithMostMovies);
-            }
+        view.showCountryButton.addActionListener(arg0 -> {
+           String countryWithMostMovies = model.getCountryWithMostMovies();
+           view.updateCountryLabel(countryWithMostMovies);
         });
         
         view.calculateDateDiffButton.addActionListener(arg0 -> {
@@ -83,7 +82,13 @@ public class Controller  {
     }
     
     
-    
+    /**
+     * Handles the input movie ID entered by the user. Checks if the input is valid,
+     * and if so, calculates the difference in days between the movie's release date
+     * and the date added, then updates the view.
+     * 
+     * @param movieId the ID of the movie entered by the user.
+     */
     private void handleMovieIdInput(String movieId) {
         if (movieId.isEmpty()) {
             view.showErrorDialog("Movie ID cannot be empty.");
@@ -105,28 +110,38 @@ public class Controller  {
         }
     }
     
+    
+    /**
+     * Configures keyboard shortcuts for the view's components.
+     * <ul>
+     *   <li>Sets up the keyboard shortcut {@code Alt + C} to display the country with the most movies.</li>
+     *   <li>Sets up the keyboard shortcut {@code Alt + D} to calculate the release date difference
+     *       based on the entered movie ID.</li>
+     * </ul>
+     */
     private void setKeyboardShortcuts() {
+        
         view.getFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
         .put(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.ALT_DOWN_MASK), "showCountry");
     
-    view.getFrame().getRootPane().getActionMap().put("showCountry", new AbstractAction() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String countryWithMostMovies = model.getCountryWithMostMovies();
-            view.updateCountryLabel(countryWithMostMovies);
-        }
-    });
+        view.getFrame().getRootPane().getActionMap().put("showCountry", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String countryWithMostMovies = model.getCountryWithMostMovies();
+                view.updateCountryLabel(countryWithMostMovies);
+            }
+        });
 
-    // Rejestracja skrótu klawiszowego Alt + D dla przycisku calculateDateDiffButton
-    view.getFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-        .put(KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.ALT_DOWN_MASK), "calculateDateDiff");
+        view.getFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+            .put(KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.ALT_DOWN_MASK), "calculateDateDiff");
+
+        view.getFrame().getRootPane().getActionMap().put("calculateDateDiff", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String movieId = view.getMovieIdInput();
+                handleMovieIdInput(movieId);
+            }
+        });
     
-    view.getFrame().getRootPane().getActionMap().put("calculateDateDiff", new AbstractAction() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String movieId = view.getMovieIdInput();
-            handleMovieIdInput(movieId);
-        }
-    });
     }
 }

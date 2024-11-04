@@ -13,14 +13,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Represents the Model component of the application, following the MVC design pattern.
+ * This class manages movie data, providing functionalities such as loading movie data from a CSV file,
+ * retrieving specific movies by ID, and finding the country with the most movies.
+ * It also supports property change notifications for GUI updates.
  * 
- * Represents the Model component of the application following the MVC design pattern.
- * This class manages the data related to movies, including adding sample movies,
- * retrieving movies by ID, and finding the country with the most movies.
+ * <p>Functionalities include:</p>
+ * <ul>
+ *   <li>Loading movies from a CSV file.</li>
+ *   <li>Retrieving movies by ID.</li>
+ *   <li>Calculating release date differences for each movie.</li>
+ *   <li>Identifying the country with the most movies.</li>
+ * </ul>
  * 
  * @author Karolina Suska
  * @version 2.1
- * 
  */
 public class Model {
     /** 
@@ -32,7 +39,10 @@ public class Model {
      */
     private final List<Movie> movies;
     
-    
+    /**
+     * Constructs a Model instance, initializing the list of movies
+     * and loading data from the default CSV file.
+     */
     public Model(){
         swingPropChangeFirer = new SwingPropertyChangeSupport(this);
         movies = new ArrayList<>();
@@ -40,8 +50,11 @@ public class Model {
     }
     
     /**
-     * Loads movies from a CSV file and adds them to the movies list.
-     * @param filePath The path to the CSV file containing movie data.
+     * Loads movie data from a CSV file and populates the movies list.
+     * Each line in the CSV file should contain fields for ID, type, title, director,
+     * cast, country, date added, release year, rating, duration, listed genres, and description.
+     * 
+     * <p>If any fields are missing or contain incorrect data, the line will be skipped with an error message.</p>
      */
     private void loadMoviesFromCsv() {
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("netflix_titles.csv");
@@ -122,8 +135,8 @@ public class Model {
     /**
      * Retrieves a Movie object by its ID.
      *
-     * @param id The ID of the movie to be retrieved.
-     * @return The Movie object with the specified ID, or null if not found.
+     * @param id The ID of the movie to be retrieved, expected in the format 's' followed by a number (e.g., 's1').
+     * @return The Movie object with the specified ID, or null if no such movie is found.
      * @throws InvalidMovieIdException if the ID format is invalid.
      */
     public Movie getMovieById(String id)  throws InvalidMovieIdException {
@@ -140,9 +153,9 @@ public class Model {
     }
     
     /**
-     * Determines the country with the most movies in the list.
+     * Finds the country with the highest number of movies in the list.
      *
-     * @return The country with the highest number of movies.
+     * @return The country with the most movies; returns "Unknown" if no valid country is found.
      */
     public String getCountryWithMostMovies() {
         Map<String, Integer> countryCount = new HashMap<>();
@@ -169,9 +182,9 @@ public class Model {
     }
     
     /**
-     * Retrieves a list of movies along with their release date differences.
+     * Generates a list of movie titles along with their release date differences.
      *
-     * @return A list of strings representing movie titles and their release date differences.
+     * @return A list of strings, each containing a movie title and its release date difference in days.
      */
     public List<String> getMoviesWithReleaseDifferences() {
         List<String> moviesWithDifferences = new ArrayList<>();

@@ -5,15 +5,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 /**
- * 
- * Represents a movie in the system with attributes such as title, director, country, 
- * release year, duration, and date when the movie was added to the platform.
- * Also provides functionality to calculate the difference in days between the release 
- * year and the date the movie was added.
+ * Represents a movie in the system, containing attributes such as title, director, country,
+ * release year, duration, and the date when the movie was added to the platform.
+ * Provides functionality to calculate the difference in days between the release year
+ * and the date the movie was added to the platform.
  * 
  * @author Karolina Suska
  * @version 2.1
- * 
  */
 public class Movie {
     
@@ -21,7 +19,9 @@ public class Movie {
      * Unique identifier for the movie in the system. 
      */
     private final String showId;
-    
+    /** 
+     * Type of the content (e.g., movie, series). 
+     */
     private final String type;
     /** 
      * Title of the movie. 
@@ -31,7 +31,9 @@ public class Movie {
      * Director of the movie. 
      */
     private final String director;
-    
+    /** 
+     * Cast of the movie, as a comma-separated list of actor names. 
+     */
     private final String cast;
     /** 
      * Country where the movie was produced. 
@@ -45,18 +47,38 @@ public class Movie {
      * Release year of the movie. 
      */
     private final Integer releaseYear;
-    
+    /** 
+     * Age rating of the movie. 
+     */
     private final String rating;
     /** 
      * Duration of the movie or number of seasons if it is a series. 
      */
     private final String duration;
-    
+    /** 
+     * Categories or genres the movie is listed under. 
+     */
     private final String listedIn;
+    /** Description or summary of the movie's content. */
     private final String description;
     
     
-    
+    /**
+     * Constructs a Movie instance with the specified attributes.
+     * 
+     * @param showId Unique identifier of the movie.
+     * @param type Type of the content (e.g., movie, series).
+     * @param title Title of the movie.
+     * @param director Director of the movie.
+     * @param cast Cast of the movie.
+     * @param country Production country of the movie.
+     * @param dateAdded Date when the movie was added to the platform.
+     * @param releaseYear Release year of the movie.
+     * @param rating Age rating of the movie.
+     * @param duration Duration of the movie or number of seasons if a series.
+     * @param listedIn Categories the movie is listed under.
+     * @param description Summary of the movie's content.
+     */
     public Movie(String showId, String type, String title, String director, String cast, String country,
                 String dateAdded, Integer releaseYear, String rating,  String duration, String listedIn, String description) {
        
@@ -82,7 +104,11 @@ public class Movie {
     public String getId() {
         return showId;
     }
-    
+    /**
+     * Retrieves the type of the movie (e.g., movie or series).
+     *
+     * @return the type of the movie.
+     */
     public String getType() {
         return type;
     }
@@ -103,7 +129,11 @@ public class Movie {
     public String getDirector() {
         return director;
     }
-    
+    /**
+     * Retrieves the cast of the movie.
+     *
+     * @return the cast of the movie.
+     */
     public String getCast() {
         return cast;
     }
@@ -134,8 +164,11 @@ public class Movie {
     public int getReleaseYear() {
         return releaseYear;
     }
-
-    
+    /**
+     * Retrieves the age rating of the movie.
+     *
+     * @return the age rating of the movie.
+     */
     public String getRating() {
         return rating;
     }
@@ -147,11 +180,19 @@ public class Movie {
     public String getDuration() {
         return duration;
     }
-    
+    /**
+     * Retrieves the categories or genres under which the movie is listed.
+     *
+     * @return the categories or genres of the movie.
+     */
     public String getListedIn() {
         return listedIn;
     }
-    
+    /**
+     * Retrieves the description or summary of the movie's content.
+     *
+     * @return the description of the movie.
+     */
     public String getDescription() {
         return description;
     }
@@ -160,7 +201,7 @@ public class Movie {
      * Calculates the difference in days between the movie's release date (January 1 of the release year)
      * and the date it was added to the platform.
      * 
-     * <p>If the date cannot be parsed, the method returns {@code Long.MAX_VALUE}.
+     * <p>If the date cannot be parsed, the method returns {@code Long.MAX_VALUE}.</p>
      *
      * @return the number of days between the release date and the added date, or {@code Long.MAX_VALUE} if parsing fails.
      */
@@ -178,8 +219,9 @@ public class Movie {
     }
     
     /**
-     * Returns a string representation of the movie, including title, director, year, country, 
-     * and the difference in days between the release date and the date added.
+     * Returns a string representation of the movie, including title, director, release year, country,
+     * rating, duration, and a description. Also includes the difference in days between the release date
+     * and the date the movie was added to the platform.
      *
      * @return a string describing the movie's main attributes.
      */

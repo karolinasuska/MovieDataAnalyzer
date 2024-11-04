@@ -1,20 +1,21 @@
 /**
- * Main package for the Netflix Analyzer application.
+ * The main package for the Netflix Analyzer application.
  * 
- * <p>This package serves as the entry point for the application, providing
- * the main class responsible for initializing the application and starting
- * the controller logic. It integrates with other core packages like 
- * {@code pl.polsl.model} for data handling and {@code pl.polsl.view} for 
- * graphical user interface elements.
- * 
- * <p>The primary class in this package is:
+ * <p>This package contains the entry point for the application, responsible for initializing 
+ * and launching the core components. It integrates with other packages, including:
  * <ul>
- *   <li>{@link pl.polsl.netflix.Netflix} - The main class that initializes the
- *   application, sets up dependencies, and launches the controller.</li>
+ *   <li>{@code pl.polsl.model} - Manages data-related logic and movie information.</li>
+ *   <li>{@code pl.polsl.view} - Provides graphical user interface elements for user interactions.</li>
+ * </ul>
+ * 
+ * <p>The primary class in this package:
+ * <ul>
+ *   <li>{@link pl.polsl.netflix.Netflix} - Serves as the main class, initializing the 
+ *   application, setting up dependencies, and starting the controller logic.</li>
  * </ul>
  * 
  * @author Karolina Suska
- * @version 1.2
- * @since 1.0
+ * @version 2.1
+ * 
  */
 package pl.polsl.netflix;

@@ -10,10 +10,16 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
- * 
  * Represents the graphical user interface for the Netflix Analyzer application.
  * Provides controls to interact with the data model and display information
  * such as movies and calculated release date differences.
+ * 
+ * <p>This class is responsible for:</p>
+ * <ul>
+ *   <li>Setting up and displaying the main application frame.</li>
+ *   <li>Providing a table for displaying movie information and various controls for user interaction.</li>
+ *   <li>Handling the visual representation of user input and output fields.</li>
+ * </ul>
  * 
  * @author Karolina Suska
  * @version 2.1
@@ -121,20 +127,22 @@ public class View {
      * This includes creating the main application frame, configuring panels, setting layouts,
      * and adding components like buttons, labels, tables, and text areas.
      * 
-     * <p> The layout is organized as follows:
+     * <p>The layout is organized as follows:</p>
      * <ul>
      *   <li>A {@code BorderLayout} for the main frame, dividing the GUI into center, south, and east sections.</li>
      *   <li>A {@code GridBagLayout} for the control panel to allow flexible positioning of input fields,
-     *   labels, and buttons.</li>
+     *       labels, and buttons.</li>
      * </ul>
-     * <p> Components added to the GUI include:
+     * 
+     * <p>Components added to the GUI include:</p>
      * <ul>
      *   <li>A table for displaying movie data in the center of the frame, with columns for movie attributes.</li>
      *   <li>A control panel at the bottom containing buttons, labels, and input fields for user interactions.</li>
      *   <li>A text area on the right side of the frame, displaying calculated release date differences.</li>
      * </ul>
-     * Insets are set to create spacing between components within the control panel, and a titled border is used for
-     * the text area to enhance readability.
+     * 
+     * <p>Insets are set to create spacing between components within the control panel, and a titled border is used for
+     * the text area to enhance readability.</p>
      */
     private void prepareGUI(){
         
@@ -164,10 +172,12 @@ public class View {
         
         
         countryLabel = new JLabel("Country with most movies: ");
-        
+        countryLabel.getAccessibleContext().setAccessibleDescription("Displays the country with the most movies based on the dataset.");
+
         
         movieIdInput = new JTextField(10); 
         movieIdInput.setToolTipText("Enter the Movie ID to calculate the release date difference.");
+        movieIdInput.getAccessibleContext().setAccessibleDescription("Text field for entering the Movie ID to calculate the release date difference.");
         
         
         calculateDateDiffButton = new JButton("Calculate Date Difference"); 
@@ -179,7 +189,12 @@ public class View {
         differenceArea = new JTextArea(3, 30); 
         differenceArea.setEditable(false);
         differenceArea.setBorder(BorderFactory.createTitledBorder("Release Date Differences"));
-
+        differenceArea.getAccessibleContext().setAccessibleDescription("Displays calculated release date differences for movies.");
+        
+        movieTable.setToolTipText("Movie data table. Use the table to view movie details.");
+        movieTable.getAccessibleContext().setAccessibleDescription("Table displaying movie data including show ID, title, director, country, date added, release year, and duration.");
+  
+        
         gbc.gridx = 0;
         gbc.gridy = 0;
         controlPanel.add(showCountryButton, gbc);
@@ -238,6 +253,11 @@ public class View {
         }
     }
     
+    /**
+     * Shows an error dialog with the specified message.
+     *
+     * @param message the error message to display in the dialog box.
+     */
     public void showErrorDialog(String message) {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
     }

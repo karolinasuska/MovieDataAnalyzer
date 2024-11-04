@@ -1,27 +1,27 @@
 /**
  * Provides the graphical user interface (GUI) for the Netflix Analyzer application.
  * 
- * <p>This package is responsible for defining and managing the visual components 
- * that allow users to interact with the application. It includes setup for various 
- * Swing components such as frames, panels, buttons, tables, and labels that display 
- * movie information and handle user inputs.
+ * <p>This package defines and manages the visual components that facilitate user interaction 
+ * with the application. It includes setup and configuration of various Swing components 
+ * such as frames, panels, buttons, tables, and labels, allowing users to view and interact 
+ * with movie data.
  * 
- * <p>Classes in this package include:
+ * <p>Key class in this package:
  * <ul>
- *   <li>{@link pl.polsl.view.View} - Main GUI class that initializes and configures
- *   the layout, components, and event listeners for user interactions.</li>
+ *   <li>{@link pl.polsl.view.View} - The main GUI class, responsible for initializing and configuring
+ *   the layout, components, and event listeners that enable user interactions.</li>
  * </ul>
  * 
- * <p>This package interacts closely with:
+ * <p>This package closely integrates with:
  * <ul>
- *   <li>{@code pl.polsl.model} - Provides the data model displayed and updated through
+ *   <li>{@code pl.polsl.model} - Supplies the data displayed and manipulated through
  *   the GUI components.</li>
- *   <li>{@code pl.polsl.controller} - Connects GUI actions with application logic, 
- *   ensuring responsive and interactive functionality.</li>
+ *   <li>{@code pl.polsl.controller} - Connects GUI events to application logic, ensuring
+ *   responsive and interactive behavior.</li>
  * </ul>
  * 
  * @author Karolina Suska
- * @version 1.2
- * @since 1.0
+ * @version 2.1
+ * 
  */
 package pl.polsl.view;
