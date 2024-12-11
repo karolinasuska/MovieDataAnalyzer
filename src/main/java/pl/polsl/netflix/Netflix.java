@@ -14,7 +14,7 @@ import pl.polsl.controller.*;
  * movies, such as retrieving details based on a movie ID.</p>
  * 
  * @author Karolina Suska
- * @version 2.1
+ * @version 3.1
  */
 public class Netflix {
     /**

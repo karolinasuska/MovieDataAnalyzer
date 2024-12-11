@@ -8,7 +8,7 @@ package pl.polsl.model;
  * ensuring that only properly formatted IDs are processed.</p>
  * 
  * @author Karolina Suska
- * @version 2.1
+ * @version 3.1
  */
 public class InvalidMovieIdException extends Exception {
     

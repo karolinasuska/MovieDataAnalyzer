@@ -22,7 +22,7 @@ import java.awt.event.KeyEvent;
  * </ul>
  * 
  * @author Karolina Suska
- * @version 2.1
+ * @version 3.1
  */
 public class View {
     /** 
@@ -65,6 +65,10 @@ public class View {
      * Button to calculate and display the release date difference for a selected movie. 
      */
     public JButton calculateDateDiffButton; 
+    
+    public JButton sortByDateButton;
+    
+    public JComboBox<String> sortOrderComboBox; 
     
     /**
      * Constructs a View for the Netflix Analyzer application, initializing the GUI components.
@@ -174,7 +178,7 @@ public class View {
         countryLabel = new JLabel("Country with most movies: ");
         countryLabel.getAccessibleContext().setAccessibleDescription("Displays the country with the most movies based on the dataset.");
 
-        
+       
         movieIdInput = new JTextField(10); 
         movieIdInput.setToolTipText("Enter the Movie ID to calculate the release date difference.");
         movieIdInput.getAccessibleContext().setAccessibleDescription("Text field for entering the Movie ID to calculate the release date difference.");
@@ -194,6 +198,30 @@ public class View {
         movieTable.setToolTipText("Movie data table. Use the table to view movie details.");
         movieTable.getAccessibleContext().setAccessibleDescription("Table displaying movie data including show ID, title, director, country, date added, release year, and duration.");
   
+         // Sort by Date button configuration
+        sortByDateButton = new JButton("Sort by Date Added");
+        sortByDateButton.setMnemonic(KeyEvent.VK_S);
+        sortByDateButton.setToolTipText("Click to sort movies by date added. (Alt + S)");
+        sortByDateButton.getAccessibleContext().setAccessibleDescription("Button to sort movies by date added.");
+        
+        String[] sortOrderOptions = {"Ascending", "Descending"};
+        sortOrderComboBox = new JComboBox<>(sortOrderOptions);
+        
+        JPanel sortPanel = new JPanel();
+        sortPanel.setLayout(new GridBagLayout());
+        sortPanel.setBorder(BorderFactory.createTitledBorder("Sort by Date Added")); // Dodanie ramki tytułowej
+        
+        GridBagConstraints sortGbc = new GridBagConstraints();
+        sortGbc.fill = GridBagConstraints.HORIZONTAL;
+        sortGbc.insets = new Insets(5, 5, 5, 5);
+
+        
+        sortGbc.gridx = 0;
+        sortGbc.gridy = 0;
+        sortPanel.add(sortByDateButton, sortGbc);
+    
+        sortGbc.gridx = 1;
+        sortPanel.add(sortOrderComboBox, sortGbc);
         
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -202,6 +230,10 @@ public class View {
         gbc.gridx = 1;
         controlPanel.add(countryLabel, gbc);
         
+        gbc.gridx = 3;
+        gbc.gridy = 0;
+        controlPanel.add(sortPanel, gbc);  // Dodanie panelu z ramką do głównego panelu
+    
         gbc.gridx = 0;
         gbc.gridy = 1;
         controlPanel.add(new JLabel("Enter Movie ID: "), gbc);
@@ -216,7 +248,8 @@ public class View {
         gbc.gridy = 2; // Ustawić differenceArea pod kontrolkami
         gbc.gridwidth = 3; // Rozciągnąć na wszystkie kolumny
         controlPanel.add(differenceArea, gbc);
-
+        
+        
         frame.add(scrollPane, BorderLayout.CENTER); 
         frame.add(controlPanel, BorderLayout.SOUTH); 
         
@@ -231,13 +264,13 @@ public class View {
         tableModel.setRowCount(0); 
         for (Movie movie : model.getMovies()) {
             Object[] rowData = {
-                movie.getId(),
-                movie.getTitle(),
-                movie.getDirector(),
-                movie.getCountry(),
-                movie.getDateAdded(),
-                movie.getReleaseYear(),
-                movie.getDuration()
+                movie.showId(),
+                movie.title(),
+                movie.director(),
+                movie.country(),
+                movie.dateAdded(),
+                movie.releaseYear(),
+                movie.duration()
             };
             tableModel.addRow(rowData); 
         }

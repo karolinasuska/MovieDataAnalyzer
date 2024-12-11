@@ -15,7 +15,7 @@
  * </ul>
  * 
  * @author Karolina Suska
- * @version 2.1
+ * @version 3.1
  * 
  */
 package pl.polsl.netflix;

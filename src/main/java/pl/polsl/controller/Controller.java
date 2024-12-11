@@ -22,7 +22,7 @@ import javax.swing.KeyStroke;
  * </ul>
  * 
  * @author Karolina Suska
- * @version 2.1
+ * @version 3.1
  */
 public class Controller  {
     
@@ -43,7 +43,13 @@ public class Controller  {
      * @param args an array of command-line arguments, where the first argument is a movie ID.
      */
     public Controller(String[] args) {
-        this.model = new Model();
+        try {
+            this.model = new Model(); 
+        } catch (InvalidMovieIdException e) {
+            JOptionPane.showMessageDialog(null, "Error loading model: " + e.getMessage());
+            this.model = null; 
+            return; 
+        }
         this.view = new View(model);
         this.viewEvent();
         
@@ -78,6 +84,17 @@ public class Controller  {
             handleMovieIdInput(movieId);
         });
         
+        view.sortByDateButton.addActionListener(e -> {
+        String selectedOrder = (String) view.sortOrderComboBox.getSelectedItem();
+        boolean ascending = selectedOrder.equals("Ascending");
+
+        // Wywołanie metody sortującej w modelu
+        model.sortMoviesByDateAdded(ascending);
+
+        // Odświeżenie tabeli
+        view.displayMovies();
+});
+        
         setKeyboardShortcuts();
     }
     
@@ -105,8 +122,6 @@ public class Controller  {
             }
         } catch (InvalidMovieIdException e) {
             view.showErrorDialog(e.getMessage());
-        } catch (Exception e) {
-            view.showErrorDialog("An unexpected error occurred: " + e.getMessage());
         }
     }
     
