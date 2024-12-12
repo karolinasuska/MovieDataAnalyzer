@@ -27,6 +27,7 @@ The project is actively in development, and the final version will encompass all
 - **Java SE**: Core application logic.
 - **Swing**: GUI development.
 - **Git**: Version control and code management.
+- **JUnit**: Unit testing for application validation.
 
 ## Prerequisites
 
